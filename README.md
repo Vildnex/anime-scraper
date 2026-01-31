@@ -64,15 +64,110 @@ List all available nyaa.si categories and their codes.
 
 Show the version number.
 
-## Interactive Workflow
+## Full Example
 
-When you run `anime-scraper search "Frieren"`, the tool walks through these steps:
+### 1. Run the command
 
-1. **Search** -- Queries nyaa.si across up to N pages, optionally fetching submitter info from detail pages
-2. **Language filter** -- Prompts you to select preferred audio and subtitle languages, then filters results
-3. **Metadata extraction & grouping** -- Fetches detail pages, extracts metadata (release group, season, quality, etc.), and groups torrents by a deterministic key: `{release_group}|{anime_name}|{season}|{audio}|{subtitle}|{quality}`
-4. **Group selection** -- Displays a table of groups with episode range, quality, seeder counts; you pick one to inspect
-5. **Download** -- Asks whether to download `.torrent` files, create a magnet bundle, or both, then saves to the output directory
+```bash
+anime-scraper search "The Daily Life of the Immortal King"
+```
+
+### 2. The tool searches nyaa.si and fetches submitter info
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║     ANIME SCRAPER                                            ║
+║     Search, Group & Download Anime from Nyaa.si              ║
+║     Deterministic Grouping                                   ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+Searching for: The Daily Life of the Immortal King
+
+Step 1: Searching nyaa.si...
+⠴ Fetching submitter 375/375...
+Found 375 torrents
+```
+
+### 3. Select language preferences
+
+```
+Step 2: Language Preferences
+
+Language Preferences
+Filter torrents by audio and subtitle language
+
+Audio Language Options:
+  0. Any
+  1. English
+  2. Japanese
+  3. Spanish
+  4. Portuguese
+  5. French
+  6. German
+  7. Italian
+  8. Chinese
+
+Select audio language (number or name) (0): 0
+
+Subtitle Language Options:
+  0. Any
+  1. English
+  2. Spanish
+  3. Portuguese
+  4. French
+  5. German
+  6. Italian
+  7. Chinese
+  8. Arabic
+  9. Multi
+
+Select subtitle language (number or name) (0): 1
+
+Selected: Audio=Any, Subtitles=English
+Filtered: 120/375 torrents match your language preferences
+```
+
+### 4. Metadata is extracted and torrents are grouped
+
+```
+Step 3: Extracting metadata and grouping...
+
+Fetching torrent details for metadata extraction...
+  Fetching details for: [Yameii] The Daily Life of the Immortal ... ━━━━━━━━━━━━━━━━━━━━ 100%
+Extracted metadata for 120 torrents
+
+Grouping torrents by metadata...
+Created 28 groups (deterministic)
+```
+
+### 5. Browse groups and select one to download
+
+```
+Step 4: Select a group to download
+                                    Torrent Groups
+╭──────┬──────────────────────────────────┬────────┬──────────┬─────────┬────────┬──────────┬─────────╮
+│ #    │ Group Name                       │ Season │ Episodes │ Quality │ Dubbed │ Torrents │ Total   │
+│      │                                  │        │          │         │        │          │ Seeders │
+├──────┼──────────────────────────────────┼────────┼──────────┼─────────┼────────┼──────────┼─────────┤
+│ 1    │ Yameii - The Daily Life of th... │ S4     │ Ep 1-12  │ 1080p   │ Yes    │ 21       │ 188     │
+│ 2    │ sff - The Daily Life Of The I... │ S1     │ Various  │ 1080p   │ Yes    │ 1        │ 157     │
+│ 3    │ Yameii - Xian Wang De Richang... │ S2     │ Ep 1-15  │ 1080p   │ Yes    │ 15       │ 67      │
+│ 4    │ Yameii - The Daily Life of th... │ S5     │ Ep 1     │ 1080p   │ Yes    │ 1        │ 55      │
+│ 5    │ Yameii - The Daily Life of th... │ S4     │ Ep 1-12  │ 720p    │ Yes    │ 15       │ 49      │
+│ ...  │ ...                              │ ...    │ ...      │ ...     │ ...    │ ...      │ ...     │
+│ 28   │ Metaljerk - The Daily Life of... │ S1     │ Ep 13    │ 1080p   │ Yes    │ 1        │ 0       │
+╰──────┴──────────────────────────────────┴────────┴──────────┴─────────┴────────┴──────────┴─────────╯
+
+Options:
+  1-{n} - View group details and download options
+  q     - Quit without downloading
+
+Select a group number to view details (q):
+```
+
+Select a group number to review individual torrents, confirm the download, and the tool saves `.torrent` files and/or a magnet bundle to your output directory.
 
 ## Architecture
 
